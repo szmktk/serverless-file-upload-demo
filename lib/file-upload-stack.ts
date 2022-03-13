@@ -13,6 +13,11 @@ export class FileUploadStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
+    new s3.Bucket(this, id, {
+      publicReadAccess: true,
+      websiteIndexDocument: 'index.html'
+    })
+
     const uploadBucket = new s3.Bucket(this, `${id}-uploadBucket`, {
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       encryption: s3.BucketEncryption.S3_MANAGED,
@@ -66,7 +71,7 @@ export class FileUploadStack extends Stack {
       integration: new HttpLambdaIntegration(id, getSignedUrlFunction),
     })
 
-    new CfnOutput(this, id, {
+    new CfnOutput(this, `${id}-httpApiUrl`, {
       value: httpApi.url!,
     });
   }
