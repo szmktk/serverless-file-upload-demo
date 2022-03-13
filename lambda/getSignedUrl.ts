@@ -13,11 +13,12 @@ export const handler = async (event: any): Promise<string> => {
 }
 
 const getUploadURL = async () => {
-  const key = `${uuid()}.txt`
+  const key = `${uuid()}.jpeg`
 
   const command = new PutObjectCommand({
     Bucket: uploadBucket,
-    Key: key
+    Key: key,
+    ContentType: 'image/jpeg'
   });
   const url = await getSignedUrl(s3client, command, {expiresIn: urlExpirationSeconds})
 
