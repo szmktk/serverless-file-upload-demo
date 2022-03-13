@@ -1,15 +1,8 @@
-# Welcome to your CDK TypeScript project
+# Serverless file upload demo
 
-You should explore the contents of this project. It demonstrates a CDK app with an instance of a stack (`FileUploadStack`)
-which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
+This is a sample application built with AWS managed services:
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
-## Useful commands
-
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+- [AWS Cloud Development Kit](https://aws.amazon.com/cdk/)
+- [Amazon S3](https://aws.amazon.com/s3/)
+- [AWS Lambda](https://aws.amazon.com/lambda/)
+- [AWS Api Gateway](https://aws.amazon.com/api-gateway/)
