@@ -10,8 +10,8 @@ test('SQS Queue and SNS Topic Created', () => {
 
   const template = Template.fromStack(stack);
 
-  template.hasResourceProperties('AWS::SQS::Queue', {
-    VisibilityTimeout: 300
+  template.hasResourceProperties('AWS::Lambda::Function', {
+    memorySize: 128,
   });
-  template.resourceCountIs('AWS::SNS::Topic', 1);
+  template.resourceCountIs('AWS::S3::Bucket', 2);
 });
