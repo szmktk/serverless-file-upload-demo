@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Upload file to S3</title>
-    <script type="module" src="https://unpkg.com/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://unpkg.com/axios@0.2.1/dist/axios.min.js"></script>
   </head>
   <body>
@@ -15,15 +15,13 @@
       </div>
       <div v-else>
         <img :src="image" />
-        <button v-if="!uploadURL" @click="removeImage">Remove image</button>
-        <button v-if="!uploadURL" @click="uploadImage">Upload image</button>
+        <button v-if="!uploadUrl" @click="removeImage">Remove image</button>
+        <button v-if="!uploadUrl" @click="uploadImage">Upload image</button>
       </div>
-      <h2 v-if="uploadURL">Success! Image uploaded to bucket.</h2>
+      <h2 v-if="uploadUrl">Success! Image uploaded to bucket.</h2>
     </div>
 
     <script>
-      import Vue from 'vue'
-      // var Vue = require('vue');
       const MAX_IMAGE_SIZE = 1000000
 
       /* ENTER YOUR ENDPOINT HERE */
@@ -34,7 +32,7 @@
         el: "#app",
         data: {
           image: '',
-          uploadURL: ''
+          uploadUrl: ''
         },
         methods: {
           onFileChange (e) {
@@ -76,14 +74,15 @@
               array.push(binary.charCodeAt(i))
             }
             let blobData = new Blob([new Uint8Array(array)], {type: 'image/jpeg'})
-            console.log('Uploading to: ', response.uploadURL)
-            const result = await fetch(response.uploadURL, {
+            console.log('Uploading to (response object): ', response)
+            console.log('Uploading to: ', response.uploadUrl)
+            const result = await fetch(response.uploadUrl, {
               method: 'PUT',
               body: blobData
             })
             console.log('Result: ', result)
             // Final URL for the user doesn't need the query string params
-            this.uploadURL = response.uploadURL.split('?')[0]
+            this.uploadUrl = response.uploadUrl.split('?')[0]
           }
         }
       })
